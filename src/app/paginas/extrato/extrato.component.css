@@ -1,0 +1,17 @@
+.ajuste{
+    margin-left: 10%;
+    padding-top: 3%;
+  
+}
+
+.transacoes{
+height: 400px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+   
+}

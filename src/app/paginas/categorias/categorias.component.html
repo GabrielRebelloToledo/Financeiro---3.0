@@ -1,1 +1,75 @@
-<p>categorias works!</p>
+<app-menu></app-menu>
+
+<div class="container mt-5 ml-5">
+    <div class="container mt-5 ml-5" >
+        <a *ngIf="listar" class="btn btn-primary" (click)="formul('1')"><i class="fa fa-plus-circle fa-1x" aria-hidden="true" style="margin-right: 5px;"></i>Adicionar Categoria</a>
+        <a *ngIf="!listar" class="btn btn-primary" (click)="formul('2')"><i class="fa fa-th" aria-hidden="true" style="margin-right: 5px;"></i>Listar Categoria</a>
+    </div>
+    <div *ngIf="!listar">
+        <form [formGroup]="formulario" (submit)="submit()">
+            <div class="col-md-12">
+                <div class="row mt-3">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput1">Nome da
+                                Categoria</label>
+                            <input type="text" class="form-control"
+                                formControlName="categoria"
+                                aria-label="Default"
+                                aria-describedby="inputGroup-sizing-default">
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupcategoria">Natureza da
+                                Categoria</label>
+                            <select for="formGroupcategoria"
+                                formControlName="tipo"
+                                class="form-select form-select"
+                                aria-label=".form-select-sm example">
+                                <option selected>Selecione aqui</option>
+                                <option value="1">Receita</option>
+                                <option value="2">Despesa</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group buttons mt-5 col-md-12
+                                text-center">
+                            <!-- <button class="btn btn-success mt-1" type="submit" style="width: 200px;"></button> -->
+                            <button class="btn btn-success  mt-1"
+                                type="submit" style="width: 300px;">Enviar</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+    <div *ngIf="listar">
+        <form [formGroup]="formulario">
+
+            <div class="container text-center" style="width: 80%;">
+                <table class="table table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nome Categoria</th>
+                            <th scope="col">Natureza</th>
+                            <th scope="col">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let categoria of listaCategoria">
+                            <td>{{categoria.categoria}}</td>
+                            <td>{{categoria.tipo == '1' ? 'Receita':'Despesa'}}</td>
+                             <td>
+                                <button class="btn btn-outline-primary ml-2 btn-sm" (click)="editarCategoria(categoria.id)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                <button style="margin-left: 5px;" class="btn btn-outline-danger ml-2 btn-sm" (click)="deletarCategoria(categoria.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            </td>  
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+
+</div>

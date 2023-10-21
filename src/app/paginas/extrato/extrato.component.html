@@ -1,1 +1,47 @@
-<p>extrato works!</p>
+<app-menu></app-menu>
+
+<div class="container ajuste">
+    <h4><i class="fa fa-line-chart" aria-hidden="true" style="margin-right: 5px;"></i>Extrato de Transações </h4>
+    <div class="col-md-4 transacoes" >
+        <div class="row">
+            <div class="col-md-12">
+                <div *ngFor="let transacoes of listaTransacoes">
+                    <div class="card informativos mt-2" *ngIf="transacoes.tipoLancamento == '2'" style="background-color: rgb(181, 240, 181);">
+                        <div class="card-body">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <h6>{{transacoes.dataTransacao | date: 'dd/MM/yyyy'}} - Receita</h6>
+                                        <span>R$ {{transacoes.valor}}</span><br>
+                                        <span>{{transacoes.historico}}</span>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <i class="fa fa-arrow-circle-up fa-2x" aria-hidden="true" style="color: green;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card informativos mt-2" *ngIf="transacoes.tipoLancamento == '1'" style="background-color: rgb(245, 157, 157);">
+                        <div class="card-body">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <h6>{{transacoes.dataTransacao | date: 'dd/MM/yyyy'}} - Despesa</h6>
+                                        <span>R$ {{transacoes.valor}}</span><br>
+                                        <span>{{transacoes.historico}}</span>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <i class="fa fa-arrow-circle-down fa-2x" aria-hidden="true" style="color: red;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -7,5 +7,6 @@ export interface Transacoes{
     cartao: string,
     dataTransacao: string,
     valor: number,
+    historico: string,
     
 }

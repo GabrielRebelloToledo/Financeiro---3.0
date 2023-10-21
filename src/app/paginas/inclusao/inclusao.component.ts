@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Transacoes } from './transacoes';
 import { InclusaoSeviceService } from './inclusao-sevice.service';
+import { Categorias } from '../categorias/categorias';
+import { CategoriasService } from '../categorias/categorias.service';
 
 @Component({
   selector: 'app-inclusao',
@@ -14,12 +16,14 @@ export class InclusaoComponent implements OnInit {
   formulario: FormGroup | any;
   cartaoCredito: boolean = false;
 
+  listaCategoria: Categorias[] = [];
+
   constructor(
     /* private location: Location, */
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private TransacaoService: InclusaoSeviceService
-
+    private TransacaoService: InclusaoSeviceService,
+    private CategoriasService: CategoriasService
   ) { }
 
   ngOnInit(): void {
@@ -30,7 +34,15 @@ export class InclusaoComponent implements OnInit {
       cartao: ['', Validators.required],
       dataTransacao: ['', Validators.required],
       valor: ['', Validators.required],
+      historico: ['', Validators.required],
     });
+
+    this.pesquisaCategorias();
+  }
+
+
+  pesquisaCategorias() {
+    this.CategoriasService.getAll().subscribe(result => { this.listaCategoria = result})
   }
 
 
