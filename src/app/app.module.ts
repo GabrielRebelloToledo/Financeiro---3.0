@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +13,23 @@ import { DashboardComponent } from './paginas/dashboard/dashboard.component';
 import { CategoriasComponent } from './paginas/categorias/categorias.component';
 import { CartaoCreditoComponent } from './paginas/cartao-credito/cartao-credito.component';
 import { ExtratoComponent } from './paginas/extrato/extrato.component';
+import { CurrencyMaskConfig, CurrencyMaskModule, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask';
+import ptBr from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(ptBr);
+
+export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
+  align: "right",
+  allowNegative: true,
+  decimal: ",",
+  precision: 2,
+  prefix: "R$ ",
+  suffix: "",
+  thousands: "."
+};
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,10 +47,13 @@ import { ExtratoComponent } from './paginas/extrato/extrato.component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    MaterialModule
-  
+    MaterialModule,
+    CurrencyMaskModule
+
   ],
-  providers: [],
+  providers: [{ provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig}, {
+    provide:LOCALE_ID , useValue: 'pt'
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

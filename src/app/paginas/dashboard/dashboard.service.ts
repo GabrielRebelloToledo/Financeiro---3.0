@@ -27,4 +27,8 @@ export class DashboardService {
     
     return this.http.get<Dashboard[]>(`${API}dashboard/cartao`);
   }
+  getAllCategorias(): Observable<Dashboard[]> {
+    
+    return this.http.get<Dashboard[]>(`${API}dashboard/categorias`);
+  }
 }

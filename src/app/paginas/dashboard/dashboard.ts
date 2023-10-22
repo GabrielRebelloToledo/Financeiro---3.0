@@ -5,5 +5,7 @@ export interface Dashboard{
     RECEITA:number
     SALDO:number
     CARTAO:number
+    VALORESDESPESACAT: number
+    CATEGORIASDESPESA:String
     
 }
