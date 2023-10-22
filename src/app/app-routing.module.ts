@@ -9,6 +9,10 @@ import { ExtratoComponent } from './paginas/extrato/extrato.component';
 const routes: Routes = [
 
   {
+    path:'',
+    component:DashboardComponent
+  },
+  {
     path:'inclusao',
     component:InclusaoComponent
   },
