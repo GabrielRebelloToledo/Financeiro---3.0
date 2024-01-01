@@ -1,0 +1,110 @@
+
+.ajuste {
+    margin-left: 10%;
+    padding-top: 3%;
+
+}
+
+.transacoes {
+    height: 80vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+}
+
+
+::-webkit-scrollbar {
+    width: 0px;
+
+}
+
+
+::ng-deep .green-snack {
+
+    --mdc-snackbar-container-color: green;
+    --mdc-snackbar-supporting-text-color: #FFF
+}
+
+::ng-deep .red-snack {
+
+    --mdc-snackbar-container-color: green;
+    --mdc-snackbar-supporting-text-color: #FFF
+}
+.formulario_c {
+    margin-left: 120px;
+    width: 350px;
+}
+
+/* //Small devices (landscape phones, 576px and up) */
+@media (min-width: 300px) {
+    .ajuste {
+        margin-left: 10%;
+        margin-right: auto;
+        padding-top: 3%;
+    }
+
+    .botao {
+        margin-left: 30%;
+        margin-right: auto;
+    }
+
+    .formulario_c {
+        margin-left: 120px;
+        width: 200px;
+    }
+}
+
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .ajuste {
+        margin-left: 10%;
+        margin-right: auto;
+        padding-top: 3%;
+    }
+
+    .botao {
+        margin-left: 30%;
+        margin-right: auto;
+    }
+    .formulario_c {
+        margin-left: 120px;
+        width: 350px;
+    }
+}
+
+/* // Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .formulario_c {
+        margin-left: 120px;
+        width: 1000px;
+    }
+    .botao {
+        margin-left: 18%;
+        margin-right: auto;
+    }
+}
+
+/* // X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .formulario_c {
+        margin-left: 120px;
+        width: 1000px;
+    }
+    .botao {
+        margin-left: 18%;
+        margin-right: auto;
+    }
+}
+
+/* // XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {
+    .formulario_c {
+        margin-left: 120px;
+        width: 1000px;
+    }
+
+    .botao {
+        margin-left: 18%;
+        margin-right: auto;
+    }
+}

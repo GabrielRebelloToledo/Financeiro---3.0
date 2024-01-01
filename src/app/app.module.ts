@@ -16,6 +16,7 @@ import { ExtratoComponent } from './paginas/extrato/extrato.component';
 import { CurrencyMaskConfig, CurrencyMaskModule, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask';
 import ptBr from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
+import { SnackBarComponent } from './compartilhado/snack-bar/snack-bar.component';
 
 registerLocaleData(ptBr);
 
@@ -38,8 +39,10 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     DashboardComponent,
     CategoriasComponent,
     CartaoCreditoComponent,
-    ExtratoComponent
+    ExtratoComponent,
+    SnackBarComponent
   ],
+  entryComponents:[SnackBarComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

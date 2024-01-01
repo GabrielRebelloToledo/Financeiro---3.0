@@ -1,5 +1,6 @@
-.informativos{
-    margin-top: 100px;
+.informativos {
+
+    margin-top: 10px;
     width: 250px;
     height: 70px;
     margin-left: 10px;
@@ -9,12 +10,113 @@
 }
 
 
-h6{
+h6 {
     font-size: 15px;
     margin: 0;
 }
 
-span{
+span {
     font-size: 17px;
     font-weight: bold;
 }
+
+.mes-procura{
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.ajuste-graph{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.graph-categorias-1{
+    height: 350px;
+}
+.graph-categorias-2{
+    height: 350px;
+}
+
+
+/* .icons{
+    height: 0px;
+} */
+
+/* //Small devices (landscape phones, 576px and up) */
+@media (min-width: 300px) {
+    .ajustes {
+        margin-left: 20%;
+        margin-right: auto;
+    }
+    .icons{
+        display: none;
+    }
+    .mes-procura{
+        margin-left: auto;
+        margin-right: auto;
+        width: 55%;
+    }
+
+    .ajuste-graph{
+        margin-left:20%;
+        margin-right: auto;
+    }
+
+    .graph-categorias-1{
+        
+        height: 250px;
+    }
+    .graph-categorias-2{
+        margin-top: 15px;
+        height: 250px;
+
+    }
+}
+
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 800px) {
+
+    .ajustes {
+        margin-left: 20%;
+        margin-right: auto;
+    }
+    .icons{
+        display: none;
+    }
+    .mes-procura{
+        margin-left: auto;
+        margin-right: auto;
+        width: 55%;
+    }
+
+    .ajuste-graph{
+        margin-left:20%;
+        margin-right: auto;
+    }
+
+    .graph-categorias-1{
+        /* margin-top: 15px; */
+        height: 250px;
+    }
+    .graph-categorias-2{
+        /* margin-top: 15px; */
+        height: 250px;
+
+    }
+}
+
+/* // Large devices (desktops, 992px and up) */
+@media (min-width: 992px) { .icons{
+    display: block;
+}}
+
+/* // X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { .icons{
+    display: block;
+}}
+
+/* // XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) { .icons{
+    display: block;
+}}

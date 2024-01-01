@@ -1,45 +1,115 @@
 <app-menu></app-menu>
 
 <div class="container ajuste">
-    <h4><i class="fa fa-line-chart" aria-hidden="true" style="margin-right: 5px;"></i>Extrato de Transações </h4>
-    <div class="col-md-4 transacoes" >
+    <div class="col-md-4 formulario_c">
         <div class="row">
-            <div class="col-md-12">
-                <div *ngFor="let transacoes of listaTransacoes">
-                    <div class="card informativos mt-2" *ngIf="transacoes.tipoLancamento == '2'" style="background-color: rgb(181, 240, 181);">
-                        <div class="card-body">
-                            <div class="col-md-12">
-                                <div class="row">
-                                    <div class="col-md-10">
-                                        <h6>{{transacoes.dataTransacao | date: 'dd/MM/yyyy'}} - Receita</h6>
-                                        <span>R$ {{transacoes.valor}}</span><br>
-                                        <span>{{transacoes.historico}}</span>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <i class="fa fa-arrow-circle-up fa-2x" aria-hidden="true" style="color: green;"></i>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Data Inicio:</span>
+                <input type="date" class="form-control" placeholder="Username" aria-label="Username"
+                    aria-describedby="basic-addon1" id="data1">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Data Fim:</span>
+                <input type="date" class="form-control" placeholder="Username" aria-label="Username"
+                    aria-describedby="basic-addon1" id="data2">
+                    <button class="btn btn-outline-primary" type="button" id="button-addon2" (click)="pesquisaTransacao()">Buscar</button>
+            </div>
+        </div>
+    </div>
+
+    <h4><i class="fa fa-line-chart ajuste" aria-hidden="true" style="margin-right: 5px;"></i>Extrato de Transações </h4>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12 ajuste">
+                <div class="row"  >
+                    <div class="col-md-6 transacoes"  style="height: 600px;">
+                        <div *ngFor="let transacoes of listaTransacoes">
+                            <div class="card informativos mt-2" *ngIf="transacoes.tipoLancamento == '1'"
+                                style="background-color: rgb(245, 157, 157);">
+                                <div class="card-body">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                                <h6>Data Transação - {{transacoes.dataTransacao | date: 'dd/MM/yyyy'}} -
+                                                    Despesa</h6>
+                                                <h6>Data p/ Pagamento - {{transacoes.dataPPagamento | date:
+                                                    'dd/MM/yyyy'}}</h6>
+                                                <span>Valor: {{transacoes.valor | currency:'BRL'}}</span><br>
+                                                <span>Histórico: {{transacoes.historico}}</span><br>
+                                                <span><i class="fa fa-trash-o fa-1x" style="cursor: pointer;"
+                                                        aria-hidden="true"
+                                                        (click)="deletarTrasacao(transacoes.id)"></i></span>
+                                                <span style="margin-left: 10px;"><i class="fa fa-pencil"
+                                                        style="cursor: pointer;" aria-hidden="true"
+                                                        (click)="editarTrasacao(transacoes.id)"></i></span>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="row">
+                                                    <i class="fa fa-arrow-circle-down fa-2x" aria-hidden="true"
+                                                        style="color: red;"></i>
+                                                </div>
+
+                                                <div class="row mt-1">
+                                                    <i *ngIf="transacoes.pago_recebido == 1"
+                                                        class="fa fa-handshake-o fa-3x" aria-hidden="true"
+                                                        style="color: black"></i>
+                                                    <i *ngIf="transacoes.pago_recebido == 0" class="fa fa-money fa-3x"
+                                                        aria-hidden="true" style="color: red; cursor: pointer;"
+                                                        (click)="baixar(transacoes.id)"></i>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="card informativos mt-2" *ngIf="transacoes.tipoLancamento == '1'" style="background-color: rgb(245, 157, 157);">
-                        <div class="card-body">
-                            <div class="col-md-12">
-                                <div class="row">
-                                    <div class="col-md-10">
-                                        <h6>{{transacoes.dataTransacao | date: 'dd/MM/yyyy'}} - Despesa</h6>
-                                        <span>R$ {{transacoes.valor}}</span><br>
-                                        <span>{{transacoes.historico}}</span>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <i class="fa fa-arrow-circle-down fa-2x" aria-hidden="true" style="color: red;"></i>
+                    <div class="col-md-6 transacoes" style="height: 600px;">
+                        <div *ngFor="let transacoes of listaTransacoes">
+                            <div class="card informativos mt-2" *ngIf="transacoes.tipoLancamento == '2'"
+                                style="background-color: rgb(181, 240, 181);">
+                                <div class="card-body">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                                <h6>Data Transação - {{transacoes.dataTransacao | date: 'dd/MM/yyyy'}} -
+                                                    Receita</h6>
+                                                <h6>Data p/ Pagamento - {{transacoes.dataTransacao | date:
+                                                    'dd/MM/yyyy'}}</h6>
+                                                <span>Valor: {{transacoes.valor | currency:'BRL'}}</span><br>
+                                                <span>Histórico: {{transacoes.historico}}</span><br>
+                                                <span><i class="fa fa-trash-o fa-1x" style="cursor: pointer;"
+                                                        aria-hidden="true"
+                                                        (click)="deletarTrasacao(transacoes.id)"></i></span>
+                                                <span style="margin-left: 10px;"><i class="fa fa-pencil"
+                                                        style="cursor: pointer;" aria-hidden="true"
+                                                        (click)="editarTrasacao(transacoes.id)"></i></span>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="row">
+                                                    <i class="fa fa-arrow-circle-up fa-2x" aria-hidden="true"
+                                                        style="color: green;"></i>
+                                                </div>
+                                                <div class="row mt-1">
+                                                    <i *ngIf="transacoes.pago_recebido == 1"
+                                                        class="fa fa-handshake-o fa-3x" aria-hidden="true"
+                                                        style="color: black"></i>
+                                                    <i *ngIf="transacoes.pago_recebido == 0" class="fa fa-money fa-3x"
+                                                        aria-hidden="true" style="color: red"
+                                                        (click)="baixar(transacoes.id)"></i>
+                                                </div>
+
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>

@@ -21,7 +21,23 @@ export class InclusaoSeviceService {
     return this.http.post(`${API}transacao`, trasacoes).pipe(take(1));
   }
 
-  getAll(): Observable<Transacoes[]> {
-    return this.http.get<Transacoes[]>(`${API}transacao`);
+  getAll(dt1:any,dt2:any): Observable<Transacoes[]> {
+    return this.http.get<Transacoes[]>(`${API}transacao/${dt1}/${dt2}`);
+  }
+
+  delete(id :any) {
+
+    return this.http.delete<Transacoes[]>(`${API}transacao/${id}`);
+  }
+  getById(id:any) {
+    if (!id) return EMPTY;
+    return this.http.get<Transacoes>(`${API}transacao/${id}`);
+  }
+  update(update:any, id:any) {
+    console.log(update)
+    return this.http.put(`${API}transacao/${id}`, update).pipe(take(1));
+  }
+  updateBaixa(id:any) {
+    return this.http.put(`${API}transacao/updateTitulo/${id}`,[]).pipe(take(1));
   }
 }

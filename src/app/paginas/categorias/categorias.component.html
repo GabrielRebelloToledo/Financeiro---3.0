@@ -1,29 +1,27 @@
 <app-menu></app-menu>
 
 <div class="container mt-5 ml-5">
-    <div class="container mt-5 ml-5" >
-        <a *ngIf="listar" class="btn btn-primary" (click)="formul('1')"><i class="fa fa-plus-circle fa-1x" aria-hidden="true" style="margin-right: 5px;"></i>Adicionar Categoria</a>
-        <a *ngIf="!listar" class="btn btn-primary" (click)="formul('2')"><i class="fa fa-th" aria-hidden="true" style="margin-right: 5px;"></i>Listar Categoria</a>
+    <div class="container mt-5 ml-5 botao">
+        <a *ngIf="listar" class="btn btn-primary" (click)="formul('1')"><i class="fa fa-plus-circle fa-1x"
+                aria-hidden="true" style="margin-right: 5px;"></i>Adicionar Categoria</a>
+        <a *ngIf="!listar" class="btn btn-primary" (click)="formul('2')"><i class="fa fa-th" aria-hidden="true"
+                style="margin-right: 5px;"></i>Listar Categoria</a>
     </div>
-    <div *ngIf="!listar">
+    <div *ngIf="!listar" class="formulario_c">
         <form [formGroup]="formulario" (submit)="submit()">
-            <div class="col-md-12">
+            <div class="col-md-12 ">
                 <div class="row mt-3">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="formGroupExampleInput1">Nome da
                                 Categoria</label>
-                            <input type="text" class="form-control"
-                                formControlName="categoria"
-                                aria-label="Default"
+                            <input type="text" class="form-control" formControlName="categoria" aria-label="Default"
                                 aria-describedby="inputGroup-sizing-default">
                         </div>
                         <div class="form-group">
                             <label for="formGroupcategoria">Natureza da
                                 Categoria</label>
-                            <select for="formGroupcategoria"
-                                formControlName="tipo"
-                                class="form-select form-select"
+                            <select for="formGroupcategoria" formControlName="tipo" class="form-select form-select"
                                 aria-label=".form-select-sm example">
                                 <option selected>Selecione aqui</option>
                                 <option value="1">Receita</option>
@@ -34,8 +32,7 @@
                         <div class="form-group buttons mt-5 col-md-12
                                 text-center">
                             <!-- <button class="btn btn-success mt-1" type="submit" style="width: 200px;"></button> -->
-                            <button class="btn btn-success  mt-1"
-                                type="submit" style="width: 300px;">Enviar</button>
+                            <button class="btn btn-success  mt-1" type="submit" style="width: 300px;">Enviar</button>
                         </div>
                     </div>
 
@@ -48,8 +45,8 @@
     <div *ngIf="listar">
         <form [formGroup]="formulario">
 
-            <div class="container text-center" style="width: 80%;">
-                <table class="table table-hover table-sm">
+            <div class="container " style="width: 80%;">
+                <!-- <table class="table table-hover table-sm">
                     <thead>
                         <tr>
                             <th scope="col">Nome Categoria</th>
@@ -67,7 +64,83 @@
                             </td>  
                         </tr>
                     </tbody>
-                </table>
+                </table> -->
+
+                <h4 class="mt-4 ajuste"><i class="fa fa-line-chart" aria-hidden="true"
+                        style="margin-right: 5px;"></i>Categorias
+                </h4>
+                <div class="col-md-12 ajuste">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6 transacoes">
+                                    <div *ngFor="let categoria of listaCategoria">
+                                        <div class="card informativos mt-2" *ngIf="categoria.tipo == '2'"
+                                            style="background-color: rgb(245, 157, 157);">
+                                            <div class="card-body">
+                                                <div class="col-md-12 p-2">
+                                                    <div class="row">
+                                                        <div class="col-md-10">
+
+                                                            <h6>Nome: {{categoria.categoria}}</h6>
+                                                            <span>Tipo: Depesa</span>
+                                                        </div>
+                                                        <div class="col-md-1">
+                                                            <div class="row">
+
+                                                                <i class="fa fa-trash fa-2x" aria-hidden="true"
+                                                                    (click)="deletarCategoria(categoria.id)"
+                                                                    style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-1">
+
+
+                                                            <div class="row">
+                                                                <i class="fa fa-pencil fa-2x" aria-hidden="true"
+                                                                    (click)="editarCategoria(categoria.id)"
+                                                                    style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card informativos mt-2" *ngIf="categoria.tipo == '1'"
+                                            style="background-color: rgb(157, 227, 245);">
+                                            <div class="card-body">
+                                                <div class="col-md-12 p-2">
+                                                    <div class="row">
+                                                        <div class="col-md-10">
+                                                            <h6>Nome: {{categoria.categoria}}</h6>
+                                                            <span>Tipo: Receita</span>
+                                                        </div>
+                                                        <div class="col-md-1">
+                                                            <div class="row">
+
+                                                                <i class="fa fa-trash fa-2x" aria-hidden="true"
+                                                                    (click)="deletarCategoria(categoria.id)"
+                                                                    style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-1">
+                                                            <div class="row">
+                                                                <i class="fa fa-pencil fa-2x" aria-hidden="true"
+                                                                    (click)="editarCategoria(categoria.id)"
+                                                                    style="cursor: pointer;"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
     </div>

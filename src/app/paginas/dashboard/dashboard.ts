@@ -7,5 +7,9 @@ export interface Dashboard{
     CARTAO:number
     VALORESDESPESACAT: number
     CATEGORIASDESPESA:String
+    VALORESRECEITACAT: number
+    CATEGORIASRECEITA:String
+    MES_NOME:String
+    MES_NUM:String
     
 }

@@ -5,6 +5,7 @@ import { take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 import { Dashboard } from './dashboard';
+import { Meses } from './meses';
 
 
 
@@ -19,16 +20,24 @@ export class DashboardService {
 
  
 
-  getAll(): Observable<Dashboard[]> {
+  getAll(mes:any): Observable<Dashboard[]> {
     
-    return this.http.get<Dashboard[]>(`${API}dashboard`);
+    return this.http.get<Dashboard[]>(`${API}dashboard/totais/${mes}`);
   }
-  getAllCartao(): Observable<Dashboard[]> {
+  getAllCartao(mes:any): Observable<Dashboard[]> {
     
-    return this.http.get<Dashboard[]>(`${API}dashboard/cartao`);
+    return this.http.get<Dashboard[]>(`${API}dashboard/cartao/${mes}`);
   }
-  getAllCategorias(): Observable<Dashboard[]> {
+  getAllCategorias(mes:any): Observable<Dashboard[]> {
     
-    return this.http.get<Dashboard[]>(`${API}dashboard/categorias`);
+    return this.http.get<Dashboard[]>(`${API}dashboard/categorias/${mes}`);
+  }
+  getAllCategoriasReceita(mes:any): Observable<Dashboard[]> {
+    
+    return this.http.get<Dashboard[]>(`${API}dashboard/categorias/receitas/${mes}`);
+  }
+  getAllMeses(): Observable<Meses[]> {
+    
+    return this.http.get<Meses[]>(`${API}dashboard/meses`);
   }
 }

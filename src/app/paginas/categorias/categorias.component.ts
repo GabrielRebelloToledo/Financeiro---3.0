@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategoriasService } from './categorias.service';
 import { Categorias } from './categorias';
+import { SnackBarComponent } from 'src/app/compartilhado/snack-bar/snack-bar.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { map, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-categorias',
@@ -20,11 +23,20 @@ export class CategoriasComponent implements OnInit {
     /* private location: Location, */
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private CategoriasService: CategoriasService
-
+    private CategoriasService: CategoriasService,
+    private snackBar: MatSnackBar,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
+    this.route.params
+    .pipe(
+      map((params: any) => params['id']),
+      switchMap(id => this.CategoriasService.getById(id))
+    )
+    .subscribe(categoria => this.editarForm(categoria)
+    );
+
     this.formulario = this.formBuilder.group({
       
       categoria: ['', Validators.required],
@@ -39,19 +51,6 @@ export class CategoriasComponent implements OnInit {
     this.CategoriasService.getAll().subscribe(result => { this.listaCategoria = result})
   }
 
-  onSelectChange(event: any): void {
-    // Você pode acessar o novo valor selecionado usando event.target.value
-    const novoValorSelecionado = event.target.value;
-    /* console.log(`Novo valor selecionado: ${novoValorSelecionado}`); */
-    // Faça o que for necessário com o novo valor aqui
-
-    if(novoValorSelecionado == 4){
-      this.cartaoCredito = true;
-      /* console.log(`Novo valor selecionado1: ${novoValorSelecionado}`); */
-    }else{
-      this.cartaoCredito = false;
-    }
-  }
 
 
   formul(i:any){
@@ -65,11 +64,49 @@ export class CategoriasComponent implements OnInit {
     }
   }
 
-  editarCategoria(i:any){
-    
+  editarCategoria(id:any){
+    this.router.navigate(['/categorias', id])
+    this.listar = false;
   }
-  deletarCategoria(i:any){
 
+  editarForm(categoria: Categorias | any) {
+
+    this.formulario.patchValue(
+      {
+        categoria: categoria[0].categoria,
+        tipo: categoria[0].tipo
+
+      }
+    )
+
+  }
+
+  preencheCampos(categoria: Categorias) {
+    this.formulario.patchValue(
+      {
+        categoria: categoria.categoria,
+        tipo: categoria.tipo
+      });
+
+  } 
+
+  deletarCategoria(id:any){
+    if (window.confirm('Tem certeza que deseja excluir esta categoria?')) {
+      this.CategoriasService.delete(id).subscribe(
+        (success: any) => {
+          console.log(success)
+          this.snackBar.openFromComponent(SnackBarComponent,{
+            duration:3000,
+            data:'Categoria deletada com sucesso!',
+            horizontalPosition:'right',
+            verticalPosition:'top'
+            , panelClass: ['green-snack']
+           
+          })
+          this.pesquisaCategorias()
+        }
+      )
+    }
   }
 submit() {
 
@@ -77,11 +114,18 @@ submit() {
     if (this.route.snapshot.params['id']) {
       const atualizarAluno = this.formulario.getRawValue() as Categorias;
       
-      this.CategoriasService.create(atualizarAluno).subscribe(
+      this.CategoriasService.update(atualizarAluno, this.route.snapshot.params['id']).subscribe(
         (success: any) => {
           
-          alert("Atualizado com Sucesso!")
-          
+          this.snackBar.openFromComponent(SnackBarComponent,{
+            duration:3000,
+            data:'Categoria atualizada com sucesso!',
+            horizontalPosition:'right',
+            verticalPosition:'top'
+            , panelClass: ['green-snack']
+           
+          })
+          this.pesquisaCategorias();
         }
       )
     } else {
@@ -89,8 +133,15 @@ submit() {
       this.CategoriasService.create(novoAluno).subscribe(
         (success: any) => {
           
-          alert("Incluído com Sucesso!")
-          
+          this.snackBar.openFromComponent(SnackBarComponent,{
+            duration:3000,
+            data:'Categoria incluída com sucesso!',
+            horizontalPosition:'right',
+            verticalPosition:'top'
+            , panelClass: ['green-snack']
+           
+          })
+          this.pesquisaCategorias();
         }
       )
     }

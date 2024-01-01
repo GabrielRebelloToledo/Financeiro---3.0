@@ -7,31 +7,44 @@ import { CategoriasComponent } from './paginas/categorias/categorias.component';
 import { ExtratoComponent } from './paginas/extrato/extrato.component';
 
 const routes: Routes = [
+  {
 
-  {
-    path:'',
-    component:DashboardComponent
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'monitor-financeiro',
   },
   {
-    path:'inclusao',
-    component:InclusaoComponent
+    path: 'inclusao',
+    component: InclusaoComponent
   },
   {
-    path:'monitor-financeiro',
-    component:DashboardComponent
+    path: 'inclusao/:id',
+    component: InclusaoComponent
   },
   {
-    path:'categorias',
-    component:CategoriasComponent
+    path: 'monitor-financeiro',
+    component: DashboardComponent
   },
   {
-    path:'extrato',
-    component:ExtratoComponent
+    path: 'categorias',
+    component: CategoriasComponent
+  },
+  {
+    path: 'categorias/:id',
+    component: CategoriasComponent
+  },
+  {
+    path: 'extrato',
+    component: ExtratoComponent
   },
 ];
 
+
+
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, { useHash: true })
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
